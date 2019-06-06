@@ -1,6 +1,6 @@
 {
   "name": "widget-tester",
-  "version": "1.9.2",
+  "version": "1.9.3",
   "description": "Configuration, task & mocks related to widget testing.",
   "main": "index.js",
   "scripts": {
@@ -52,7 +52,7 @@
     "properties": "^1.2.1",
     "reporter-file": "0.0.1",
     "run-sequence": "^0.3.6",
-    "sinon": "^1.11.1",
+    "sinon": "^7.3.2",
     "sinon-chai": "^2.6.0",
     "spawn-cmd": "0.0.2",
     "xml2js": "^0.4.4",
