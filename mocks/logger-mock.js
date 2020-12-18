@@ -86,6 +86,8 @@
     },
     setVersion: function(value) {
       version = value;
+    },
+    startEndpointHeartbeats: function() {
     }
   };
 
