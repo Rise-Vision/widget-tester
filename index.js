@@ -21,7 +21,7 @@
   var async = require("async");
   var gulpKarma = require("gulp-karma");
   var karma = require('karma');
-  var coveralls = require('gulp-coveralls');
+  var coveralls = require('@kollavarsham/gulp-coveralls');
   var _ = require("lodash");
   var https = require("https");
   var http = require("http");

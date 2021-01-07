@@ -1,6 +1,6 @@
 {
   "name": "widget-tester",
-  "version": "1.13.0",
+  "version": "1.13.1",
   "description": "Configuration, task & mocks related to widget testing.",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/Rise-Vision/widget-tester",
   "dependencies": {
+    "@kollavarsham/gulp-coveralls": "~0.3.4",
     "async": "^0.9.0",
     "casperjs": "^1.1.0-beta3",
     "chai": "^4.2.0",
@@ -29,7 +30,6 @@
     "express": "^4.17.1",
     "glob": "^7.1.6",
     "gulp": "^3.8.6",
-    "gulp-coveralls": "~0.1.4",
     "gulp-html-replace": "^1.1.0",
     "gulp-karma": "0.0.5",
     "gulp-protractor": "^4.1.1",
