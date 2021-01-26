@@ -13,7 +13,7 @@ var GoogleAuthPage = function () {
 
   var passwordField = element(by.css('#password input'));
 
-  var challengeCard = element(by.cssContainingText('h1', 'Verify it\'s you'));
+  var challengeCard = element(by.cssContainingText('h1', 'Verify it'));
   
   var emailChallengeInput = element(by.id('knowledge-preregistered-email-response'));
   var CHALLENGE_EMAIL = 'support@risevision.com';
