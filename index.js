@@ -29,8 +29,10 @@
   var cert = fs.readFileSync(path.join(__dirname, "keys", "https-cert.pem"));
   var e2ePort = process.env.E2E_PORT || 8099;
   var httpServer;
+  var commone2e = require('./common-e2e/common-e2e');
 
   var factory = {
+    commone2e: commone2e,
     getCoverageReportDir: function() {
       return process.env.CIRCLE_ARTIFACTS ? 
         path.join(process.env.CIRCLE_ARTIFACTS, "./coverage") : 
