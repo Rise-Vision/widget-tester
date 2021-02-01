@@ -9,13 +9,13 @@
   var rename = require("gulp-rename");
   var htmlreplace = require("gulp-html-replace");
   var spawn = require("spawn-cmd").spawn;
-  var gutil = require("gulp-util");
+  var log = require("fancy-log");
   var webdriver_update = require("gulp-protractor").webdriver_update;
   var webdriver_update_specific = require("gulp-protractor").webdriver_update_specific;
   var protractor = require("gulp-protractor").protractor;
   var path = require("path");
   var runSequence = require("run-sequence");
-  var uuid = require("node-uuid");
+  var uuid = require("uuid");
   var fs = require("fs");
   var xml2js = require("xml2js");
   var async = require("async");
@@ -102,7 +102,7 @@
                 path.resolve("reports", "casper-xunit.xml")].concat(["test"]).concat(files));
 
             casperChild.stdout.on("data", function (data) {
-                gutil.log("CasperJS:", data.toString().slice(0, -1)); // Remove \n
+                log("CasperJS:", data.toString().slice(0, -1)); // Remove \n
             });
 
             casperChild.on("close", function (code) {
@@ -172,7 +172,7 @@
               gulpKarma(karmaOptions)
               ).on("error", function(err) {
                 // Make sure failed tests cause gulp to exit non-zero
-                gutil.log("Error: ", err);
+                log("Error: ", err);
                 cb(err);
                 // throw err;
               });
@@ -217,10 +217,10 @@
                 args: args
             }))
             .on("error", function (e) {
-              gutil.log(e);
+              log(e);
               /*if(fs.statSync("./reports/angular-xunit.xml")) {
                 //output test result to console
-                gutil.log("Test report", fs.readFileSync("./reports/angular-xunit.xml", {encoding: "utf8"}));
+                log("Test report", fs.readFileSync("./reports/angular-xunit.xml", {encoding: "utf8"}));
               }*/
               if(options.throw || options.throw ===undefined) {
                 throw e;
@@ -263,7 +263,7 @@
           glob("reports/*xunit.xml", {}, function (er, files) {
             async.map(files, function (file, mapCallback) {
               var parser = new xml2js.Parser();
-              gutil.log("Processing file", file, "...");
+              log("Processing file", file, "...");
               parser.parseString(fs.readFileSync(file), function (err, result) {
 
                 var results = [];
@@ -301,7 +301,7 @@
                 },
                 function (err, result){
                   if(result) {
-                    gutil.log("Aggregated metrics result:", result);
+                    log("Aggregated metrics result:", result);
                     fs.writeFileSync("reports/metrics.json", JSON.stringify(result)); }
                     //save as Java .properties file to be picked up by Jenkins EnvInject Plugin
                     fs.writeFileSync("reports/metrics.json.properties",
