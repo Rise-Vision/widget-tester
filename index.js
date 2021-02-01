@@ -169,7 +169,7 @@
               };
             }
             return gulp.src(options.testFiles).pipe(
-              gulpKarma(karmaOptions)
+              gulpKarma.server(karmaOptions)
               ).on("error", function(err) {
                 // Make sure failed tests cause gulp to exit non-zero
                 log("Error: ", err);
