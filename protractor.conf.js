@@ -46,7 +46,7 @@ exports.config = {
 
   mochaOpts: {
     // reporter: 'require("xunit-file")',
-    reporter: 'mocha-multi',
+    reporter: 'mocha-multi-reporters',
     enableTimeouts: false,
     slow: 3000
   }
