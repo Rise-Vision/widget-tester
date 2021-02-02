@@ -7,7 +7,7 @@ module.exports = function(config){
 
     frameworks: ["mocha", "chai", "chai-as-promised", "sinon-chai"],
 
-    browsers : ["PhantomJS"],
+    browsers : ["ChromeHeadless"],
 
     preprocessors : {
       "web/script/**/*.js": "coverage"
@@ -22,7 +22,7 @@ module.exports = function(config){
             "karma-junit-reporter",
             "karma-coverage",
             "karma-chai-plugins",
-            "karma-phantomjs-launcher"
+            "karma-chrome-launcher"
             ],
 
     junitReporter : {
