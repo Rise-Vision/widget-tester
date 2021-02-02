@@ -44,7 +44,7 @@
     "karma-sinon-chai": "^2.0.2",
     "karma-webpack": "^4.0.2",
     "lodash": "^4.17.20",
-    "mocha": "6.2.2",
+    "mocha": "^6.2.2",
     "mocha-multi-reporters": "^1.5.1",
     "mocha-proshot": "1.0.1",
     "properties": "^1.2.1",
