@@ -1,6 +1,6 @@
 {
   "name": "widget-tester",
-  "version": "1.14.0",
+  "version": "1.14.1",
   "description": "Configuration, task & mocks related to widget testing.",
   "main": "index.js",
   "scripts": {
@@ -34,7 +34,7 @@
     "gulp-html-replace": "^1.6.2",
     "gulp-protractor": "^4.1.1",
     "gulp-rename": "^1.4.0",
-    "karma": "^4.4.1",
+    "karma": "^5.2.3",
     "karma-chai": "^0.1.0",
     "karma-chai-plugins": "^0.9.0",
     "karma-chrome-launcher": "3.1.0",
