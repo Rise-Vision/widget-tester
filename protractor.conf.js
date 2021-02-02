@@ -5,7 +5,7 @@ if(process.env.SELENIUM_ADDRESS) {
 process.env.LOG_XUNIT = true;
 process.env.XUNIT_FILE = (typeof process.env.XUNIT_FILE === 'undefined'  || process.env.XUNIT_FILE === '') ? 'reports/angular-xunit.xml': process.env.XUNIT_FILE;
 process.env.PROSHOT_DIR = (typeof process.env.PROSHOT_DIR === 'undefined'  || process.env.PROSHOT_DIR === '') ? 'reports/screenshots': process.env.PROSHOT_DIR;
-process.env.multi = 'spec-xunit-file=- mocha-proshot=-';
+// process.env.multi = 'spec-xunit-file=- mocha-proshot=-';
 process.env.CHROME_INSTANCES = process.env.CHROME_INSTANCES || 1;
 // process.env.MOCHA_REPORTER_FILE = 'reports/anglar.json';
 // process.env.MOCHA_REPORTER = 'JSON';
@@ -46,7 +46,11 @@ exports.config = {
 
   mochaOpts: {
     // reporter: 'require("xunit-file")',
-    reporter: 'mocha-multi',
+    // reporter: 'mocha-multi',
+    reporter: 'mocha-multi-reporters',
+    reporterOptions: {
+      reporterEnabled: 'spec-xunit-file, mocha-proshot',
+    },
     enableTimeouts: false,
     slow: 3000
   }
