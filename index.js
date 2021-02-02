@@ -19,7 +19,6 @@
   var fs = require("fs");
   var xml2js = require("xml2js");
   var async = require("async");
-  var gulpKarma = require("gulp-karma");
   var karma = require('karma');
   var coveralls = require('@kollavarsham/gulp-coveralls');
   var _ = require("lodash");
@@ -152,9 +151,10 @@
           }
           else {
             var karmaOptions = {
+              files: options.testFiles,
               configFile: options.configFile || path.join(__dirname, "karma.conf.js"),
-              action: options.watch ? "watch" : "run",
-              basePath : options.configFile || "./",
+              singleRun: options.singleRun || true,
+              basePath : options.basePath || "./",
             };
             if (options.coverageFiles) {
               karmaOptions.preprocessors = {}
@@ -168,14 +168,16 @@
                 ]
               };
             }
-            return gulp.src(options.testFiles).pipe(
-              gulpKarma(karmaOptions)
-              ).on("error", function(err) {
-                // Make sure failed tests cause gulp to exit non-zero
-                log("Error: ", err);
-                cb(err);
-                // throw err;
-              });
+            var server = new karma.Server(karmaOptions, function(exitCode) {
+              if (exitCode === 0) {
+                cb();
+              } else {
+                var msg = "Tests failed with exit code:" + exitCode;
+                console.error(msg);
+                cb(msg);
+              }
+            });
+            server.start();
           }
         };
       },
