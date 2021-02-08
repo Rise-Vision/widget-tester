@@ -14,7 +14,6 @@
   var webdriver_update_specific = require("gulp-protractor").webdriver_update_specific;
   var protractor = require("gulp-protractor").protractor;
   var path = require("path");
-  var runSequence = require("run-sequence");
   var uuid = require("uuid");
   var fs = require("fs");
   var xml2js = require("xml2js");
@@ -42,7 +41,7 @@
       webdriverUpdateSpecific: webdriver_update_specific,
       testServer: function (options) {
         options = options || {};
-        return function () {
+        return function (done) {
           var server = express();
           var rootPath = options.rootPath || "./";
           server.use(express.static(rootPath));
@@ -60,12 +59,15 @@
             hServer = http.createServer(server);
           }
           httpServer = hServer.listen(options.port || e2ePort);
-          return httpServer;
+          
+          done();
         };
       },
       testServerClose: function () {
-        return function () {
-          return httpServer.close();
+        return function (done) {
+          httpServer.close();
+
+          done();
         };
       },
       htmlE2E: function (options) {
@@ -122,12 +124,10 @@
         gulp.task(id + ":ensureReportDirectory", factory.gulpTaskFactory.ensureReportDirectory());
         gulp.task(id + ":runCasperTests", runCasperTests);
 
-        return function (cb) {
-          runSequence(
-            id + ":ensureReportDirectory",
-            id + ":runCasperTests", cb
-          );
-        };
+        return gulp.series(
+          id + ":ensureReportDirectory",
+          id + ":runCasperTests"
+        );
       },
       ensureReportDirectory: function (options) {
         options = options || {};
@@ -237,12 +237,10 @@
         gulp.task(id + ":ensureReportDirectory", factory.gulpTaskFactory.ensureReportDirectory());
         gulp.task(id + ":runAngularTest", runAngularTest);
 
-        return function (cb) {
-          runSequence(
-            id + ":ensureReportDirectory",
-            id + ":runAngularTest", cb
-          );
-        };
+        return gulp.series(
+          id + ":ensureReportDirectory",
+          id + ":runAngularTest"
+        );
       },
       coveralls: function() {
         return function () {
@@ -318,12 +316,10 @@
         gulp.task(id + ":ensureReportDirectory", factory.gulpTaskFactory.ensureReportDirectory());
         gulp.task(id + ":generateMetrics", generateMetrics);
 
-        return function (cb) {
-          runSequence(
-            id + ":ensureReportDirectory",
-            id + ":generateMetrics", cb
-          );
-        };
+        return gulp.series(
+          id + ":ensureReportDirectory",
+          id + ":generateMetrics"
+        );
       }
     }
   };
