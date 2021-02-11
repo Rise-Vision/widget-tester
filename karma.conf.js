@@ -10,7 +10,7 @@ module.exports = function(config){
     browsers : ["ChromeHeadless"],
 
     preprocessors : {
-      "web/script/**/*.js": "coverage"
+      "src/script/**/*.js": "coverage"
     },
 
     reporters: ["progress", "junit", "coverage"],
