@@ -53,14 +53,34 @@ exports.config = {
     },
     enableTimeouts: false,
     slow: 3000
-  }
+  },
+  onPrepare: function() {
+    var ignoreScript = "var callback = arguments[arguments.length - 1];" +
+        "callback()";
+    var script = "var callback = arguments[arguments.length - 1];" +
+        "angular.element(document.querySelector(\"body\")).injector()"+
+        ".get(\"$browser\").notifyWhenNoOutstandingRequests(callback)";
 
-  // onPrepare: function() {
-  //   // The require statement must be down here, since jasmine-reporters
-  //   // needs jasmine to be in the global and protractor does not guarantee
-  //   // this until inside the onPrepare function.
-  //   require("jasmine-reporters");
-  //   jasmine.getEnv().addReporter(
-  //     new jasmine.JUnitXmlReporter('xmloutput', true, true));
-  // }
+    browser.waitForAngular = function() {
+      if (browser.ignoreSynchronization) {
+        return browser.executeAsyncScript(ignoreScript);
+      }
+
+      return browser.wait(function () {
+        return browser.executeScript('return !!window.angular && !!angular.element(document.querySelector(\"body\")).injector()');
+      }, 10000)
+        .then(function() {
+          return browser.executeAsyncScript(script);
+        }); // 10000 is the timeout in millis
+    };
+
+    var getUrl = "var callback = arguments[arguments.length - 1];" +
+        "callback(window.location.href)";
+
+    browser.getCurrentUrl = function() {
+      return browser.executeAsyncScript(getUrl);
+    };
+
+
+  }
 };
