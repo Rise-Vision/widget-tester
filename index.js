@@ -89,7 +89,9 @@
         };
       },
       testE2E: function (options) {
-        // Deprecated, because it was using CasperJS
+        return function (cb) {
+          cb('Deprecated - it was using CasperJS');
+        };
       },
       ensureReportDirectory: function (options) {
         options = options || {};
