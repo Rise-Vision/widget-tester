@@ -89,45 +89,9 @@
         };
       },
       testE2E: function (options) {
-        options = options || {};
-
-        var runCasperTests = function (cb) {
-          var glob = require("glob");
-
-          // options is optional
-          glob(options.testFiles || "test/e2e/*.js", {}, function (er, files) {
-
-            var casperChild = spawn(
-              "casperjs",
-              ["--xunit=" +
-                path.resolve("reports", "casper-xunit.xml")].concat(["test"]).concat(files));
-
-            casperChild.stdout.on("data", function (data) {
-                log("CasperJS:", data.toString().slice(0, -1)); // Remove \n
-            });
-
-            casperChild.on("close", function (code) {
-                var success = code === 0; // Will be 1 in the event of failure
-                if(!success) {
-                  cb("Error has occurred.");
-                  throw code;
-                }
-                else {
-                  cb();
-                }
-                // Do something with success here
-            });
-          });
+        return function (cb) {
+          cb('Deprecated - it was using CasperJS');
         };
-
-        var id = uuid.v1();
-        gulp.task(id + ":ensureReportDirectory", factory.gulpTaskFactory.ensureReportDirectory());
-        gulp.task(id + ":runCasperTests", runCasperTests);
-
-        return gulp.series(
-          id + ":ensureReportDirectory",
-          id + ":runCasperTests"
-        );
       },
       ensureReportDirectory: function (options) {
         options = options || {};
