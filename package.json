@@ -22,7 +22,7 @@
   "homepage": "https://github.com/Rise-Vision/widget-tester",
   "dependencies": {
     "@kollavarsham/gulp-coveralls": "~0.3.4",
-    "async": "^0.9.0",
+    "async": "^2.6.4",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "event-stream": "^4.0.1",
